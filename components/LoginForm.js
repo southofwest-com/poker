@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import useVotingStore from '../lib/useVotingStore';
 
@@ -8,6 +8,14 @@ export default function LoginForm() {
   const [sessionId, setSessionId] = useState('');
   const [isCreating, setIsCreating] = useState(true);
   const { createSession, joinSession, error, clearError } = useVotingStore();
+
+  // Check for join parameter in URL to switch to join mode
+  useEffect(() => {
+    if (router.query.join) {
+      setIsCreating(false);
+      setSessionId(router.query.join);
+    }
+  }, [router.query]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

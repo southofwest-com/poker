@@ -58,12 +58,18 @@ export default function SocketHandler(req, res) {
       socket.on('join', ({ sessionId, username, isAdmin }) => {
         const session = getOrCreateSession(sessionId);
         
-        // Check if username already exists
-        const userExists = session.users.some(user => user.username === username);
-        if (userExists) {
+        // Check if username already exists in this session but with a different socket ID
+        const existingUserIndex = session.users.findIndex(user => 
+          user.username === username && user.id !== socket.id
+        );
+        
+        if (existingUserIndex >= 0) {
           socket.emit('error', 'Username already taken');
           return;
         }
+        
+        // Remove any previous instances of this socket ID
+        session.users = session.users.filter(user => user.id !== socket.id);
         
         // Check if max users reached (10)
         if (session.users.length >= 10) {
@@ -76,11 +82,18 @@ export default function SocketHandler(req, res) {
           id: socket.id, 
           username, 
           isAdmin,
-          hasVoted: false
+          hasVoted: session.votes.has(username)
         });
         
         // Notify all users in the session
         io.to(sessionId).emit('users-updated', session.users);
+        
+        // If voting is active or results exist, sync the state for the new user
+        if (session.isVotingActive) {
+          socket.emit('voting-started');
+        } else if (session.results) {
+          socket.emit('voting-ended', session.results);
+        }
       });
       
       socket.on('start-voting', ({ sessionId }) => {

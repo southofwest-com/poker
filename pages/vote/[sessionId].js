@@ -9,14 +9,17 @@ import useVotingStore from '../../lib/useVotingStore';
 export default function VotingSession() {
   const router = useRouter();
   const { sessionId: routeSessionId } = router.query;
-  const { sessionId, isAdmin, username } = useVotingStore();
+  const { sessionId, isAdmin, username, initSession } = useVotingStore();
   
   useEffect(() => {
-    if (!username && routeSessionId) {
+    // If we have a stored session, re-initialize it
+    if (sessionId && username) {
+      initSession();
+    } else if (!username && routeSessionId) {
       // User has the session ID but isn't logged in
       router.push('/?join=' + routeSessionId);
     }
-  }, [username, routeSessionId, router]);
+  }, [sessionId, username, routeSessionId, router, initSession]);
   
   return (
     <>
