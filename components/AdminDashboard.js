@@ -45,10 +45,9 @@ export default function AdminDashboard() {
               <ul className="space-y-2 py-2">
                 {users.map((user) => (
                   <li key={user.username} className="flex items-center p-2 rounded-lg hover:bg-blue-50">
-                   /** <div className="w-8 h-8 flex items-center justify-center rounded-full bg-blue-100 text-blue-700 font-bold mr-3">
-                    *  {user.username.charAt(0).toUpperCase()}
-                    *</div> 
-                    */
+                   <div className="w-8 h-8 flex items-center justify-center rounded-full bg-blue-100 text-blue-700 font-bold mr-3">
+                   //{user.username.charAt(0).toUpperCase()}
+                   </div> 
                     <span className="flex-1">
                       {user.username} {user.isAdmin ? <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded ml-2">Admin</span> : ''}
                     </span>
