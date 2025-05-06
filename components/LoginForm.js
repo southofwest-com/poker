@@ -68,7 +68,7 @@ export default function LoginForm() {
           }`}
           onClick={() => handleModeChange(true)}
         >
-          Create Session
+          Create a new session
         </button>
         <button
           className={`flex-1 py-3 px-4 text-sm sm:text-base font-medium transition-all ${
@@ -78,7 +78,7 @@ export default function LoginForm() {
           }`}
           onClick={() => handleModeChange(false)}
         >
-          Join Session
+          Join an existing voting session
         </button>
       </div>
       
@@ -120,7 +120,7 @@ export default function LoginForm() {
           type="submit"
           className="w-full bg-indigo-600 text-white py-3 sm:py-4 px-6 rounded-lg hover:bg-indigo-700 transition-all font-medium text-sm sm:text-base shadow-md hover:shadow-lg"
         >
-          {isCreating ? 'Create Voting Session' : 'Join Voting Session'}
+          {isCreating ? 'Start A Voting Session' : 'Join Voting Session'}
         </button>
       </form>
     </div>
