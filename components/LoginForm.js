@@ -55,51 +55,41 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="max-w-md w-full mx-auto p-10 bg-white rounded-xl shadow-lg border border-gray-100 transition-all">
-      <h1 className="text-3xl font-bold mb-6 text-center text-blue-600">Anonymous Voting Tool</h1>
+    <div className="max-w-md w-full mx-auto p-6 sm:p-10 bg-white rounded-xl shadow-lg border border-gray-100 transition-all">
+      <h1 className="text-2xl sm:text-3xl font-bold mb-6 text-center text-indigo-600">Anonymous Voting Tool</h1>
       
-      {/* Navigation Bar */}
-      <nav className="mb-8">
-        <div className="bg-gray-100 rounded-lg shadow-md overflow-hidden">
-          <ul className="flex">
-            <li className="flex-1">
-              <button
-                className={`w-full py-4 px-4 font-medium text-lg transition-all flex items-center justify-center ${isCreating 
-                  ? 'bg-blue-600 text-white shadow-inner' 
-                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
-                onClick={() => handleModeChange(true)}
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
-                </svg>
-                Create Session
-              </button>
-            </li>
-            <li className="flex-1">
-              <button
-                className={`w-full py-4 px-4 font-medium text-lg transition-all flex items-center justify-center ${!isCreating 
-                  ? 'bg-blue-600 text-white shadow-inner' 
-                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
-                onClick={() => handleModeChange(false)}
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M3 4a1 1 0 011-1h3.586a1 1 0 01.707.293l2 2a1 1 0 01.293.707V11a1 1 0 01-1 1h-1a1 1 0 01-1-1V8a1 1 0 00-1-1H4a1 1 0 01-1-1V4zm9 0a1 1 0 00-1 1v3.586a1 1 0 00.293.707l2 2a1 1 0 00.707.293H17a1 1 0 001-1V7a1 1 0 00-1-1h-1a1 1 0 01-1-1V4a1 1 0 00-1-1h-3z" clipRule="evenodd" />
-                </svg>
-                Join Session
-              </button>
-            </li>
-          </ul>
-        </div>
-      </nav>
+      {/* Navigation Tabs */}
+      <div className="flex mb-8 border-b border-gray-200">
+        <button
+          className={`flex-1 py-3 px-4 text-sm sm:text-base font-medium transition-all ${
+            isCreating 
+              ? 'text-indigo-600 border-b-2 border-indigo-600' 
+              : 'text-gray-500 hover:text-gray-700'
+          }`}
+          onClick={() => handleModeChange(true)}
+        >
+          Create Session
+        </button>
+        <button
+          className={`flex-1 py-3 px-4 text-sm sm:text-base font-medium transition-all ${
+            !isCreating 
+              ? 'text-indigo-600 border-b-2 border-indigo-600' 
+              : 'text-gray-500 hover:text-gray-700'
+          }`}
+          onClick={() => handleModeChange(false)}
+        >
+          Join Session
+        </button>
+      </div>
       
-      <form onSubmit={handleSubmit} className="space-y-8 transition-all duration-300">
-        <div className="space-y-2">
-          <label className="block text-gray-700 font-medium mb-2">Username</label>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div>
+          <label className="block text-sm sm:text-base text-gray-700 font-medium mb-2">Username</label>
           <input
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+            className="w-full p-3 sm:p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all"
             placeholder="Enter your username"
             maxLength={20}
             required
@@ -107,13 +97,13 @@ export default function LoginForm() {
         </div>
         
         {!isCreating && (
-          <div className="space-y-2">
-            <label className="block text-gray-700 font-medium mb-2">Session ID</label>
+          <div>
+            <label className="block text-sm sm:text-base text-gray-700 font-medium mb-2">Session ID</label>
             <input
               type="text"
               value={sessionId}
               onChange={(e) => setSessionId(e.target.value)}
-              className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+              className="w-full p-3 sm:p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all"
               placeholder="Enter session ID"
               required
             />
@@ -121,30 +111,16 @@ export default function LoginForm() {
         )}
         
         {error && (
-          <div className="p-4 bg-red-50 text-red-700 rounded-lg border border-red-100">
+          <div className="p-3 sm:p-4 bg-red-50 text-red-700 rounded-lg border border-red-100 text-sm">
             {error}
           </div>
         )}
         
         <button
           type="submit"
-          className="w-full bg-blue-600 text-white py-4 px-6 rounded-lg hover:bg-blue-700 transition-all font-medium text-lg shadow-md hover:shadow-lg"
+          className="w-full bg-indigo-600 text-white py-3 sm:py-4 px-6 rounded-lg hover:bg-indigo-700 transition-all font-medium text-sm sm:text-base shadow-md hover:shadow-lg"
         >
-          {isCreating ? (
-            <span className="flex items-center justify-center">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clipRule="evenodd" />
-              </svg>
-              Create Voting Session
-            </span>
-          ) : (
-            <span className="flex items-center justify-center">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z" />
-              </svg>
-              Join Voting Session
-            </span>
-          )}
+          {isCreating ? 'Create Voting Session' : 'Join Voting Session'}
         </button>
       </form>
     </div>
