@@ -45,32 +45,36 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg">
-      <h1 className="text-2xl font-bold mb-6 text-center">Anonymous Voting Tool</h1>
+    <div className="max-w-md w-full mx-auto p-8 bg-white rounded-xl shadow-lg border border-gray-100">
+      <h1 className="text-3xl font-bold mb-8 text-center text-blue-600">Anonymous Voting Tool</h1>
       
-      <div className="flex mb-4">
+      <div className="flex mb-6 rounded-lg overflow-hidden shadow-sm">
         <button
-          className={`flex-1 py-2 ${isCreating ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+          className={`flex-1 py-3 font-medium transition-colors ${isCreating 
+            ? 'bg-blue-600 text-white' 
+            : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
           onClick={() => setIsCreating(true)}
         >
           Create Session
         </button>
         <button
-          className={`flex-1 py-2 ${!isCreating ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+          className={`flex-1 py-3 font-medium transition-colors ${!isCreating 
+            ? 'bg-blue-600 text-white' 
+            : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
           onClick={() => setIsCreating(false)}
         >
           Join Session
         </button>
       </div>
       
-      <form onSubmit={handleSubmit}>
-        <div className="mb-4">
-          <label className="block text-gray-700 mb-2">Username</label>
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div>
+          <label className="block text-gray-700 font-medium mb-2">Username</label>
           <input
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded"
+            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
             placeholder="Enter your username"
             maxLength={20}
             required
@@ -78,13 +82,13 @@ export default function LoginForm() {
         </div>
         
         {!isCreating && (
-          <div className="mb-4">
-            <label className="block text-gray-700 mb-2">Session ID</label>
+          <div>
+            <label className="block text-gray-700 font-medium mb-2">Session ID</label>
             <input
               type="text"
               value={sessionId}
               onChange={(e) => setSessionId(e.target.value)}
-              className="w-full p-2 border border-gray-300 rounded"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
               placeholder="Enter session ID"
               required
             />
@@ -92,14 +96,14 @@ export default function LoginForm() {
         )}
         
         {error && (
-          <div className="mb-4 p-2 bg-red-100 text-red-700 rounded">
+          <div className="p-3 bg-red-50 text-red-700 rounded-lg border border-red-100">
             {error}
           </div>
         )}
         
         <button
           type="submit"
-          className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+          className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors font-medium text-lg shadow-sm"
         >
           {isCreating ? 'Create Voting Session' : 'Join Voting Session'}
         </button>

@@ -49,60 +49,73 @@ export default function ResultsSummary({ results }) {
       distribution,
     };
   }, [votes]);
+
+  // Helper function to get background color based on vote value
+  const getDistributionColor = (index) => {
+    // Color gradient from light blue to dark blue
+    const colors = [
+      'bg-blue-100', 'bg-blue-200', 'bg-blue-300', 'bg-blue-400', 'bg-blue-500',
+      'bg-blue-500', 'bg-blue-600', 'bg-blue-700', 'bg-blue-800', 'bg-blue-900'
+    ];
+    return colors[index];
+  };
   
   return (
-    <div>
-      <h2 className="text-xl font-bold mb-4">Voting Results</h2>
+    <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-100">
+      <h2 className="text-2xl font-bold mb-6 text-blue-700 border-b border-gray-200 pb-3">Voting Results</h2>
       
-      <div className="mb-6">
-        <h3 className="font-bold mb-2">Summary</h3>
-        <div className="grid grid-cols-4 gap-4 mb-4">
-          <div className="bg-gray-100 p-3 rounded">
-            <p className="text-sm text-gray-500">Total Votes</p>
-            <p className="text-xl font-bold">{votes.length}</p>
+      <div className="mb-8">
+        <h3 className="font-bold mb-4 text-lg text-gray-700">Summary</h3>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+          <div className="bg-blue-50 p-4 rounded-lg border border-blue-100">
+            <p className="text-sm text-blue-600 font-medium mb-1">Total Votes</p>
+            <p className="text-2xl font-bold text-gray-800">{votes.length}</p>
           </div>
-          <div className="bg-gray-100 p-3 rounded">
-            <p className="text-sm text-gray-500">Average</p>
-            <p className="text-xl font-bold">{stats.average}</p>
+          <div className="bg-blue-50 p-4 rounded-lg border border-blue-100">
+            <p className="text-sm text-blue-600 font-medium mb-1">Average</p>
+            <p className="text-2xl font-bold text-gray-800">{stats.average}</p>
           </div>
-          <div className="bg-gray-100 p-3 rounded">
-            <p className="text-sm text-gray-500">Median</p>
-            <p className="text-xl font-bold">{stats.median}</p>
+          <div className="bg-blue-50 p-4 rounded-lg border border-blue-100">
+            <p className="text-sm text-blue-600 font-medium mb-1">Median</p>
+            <p className="text-2xl font-bold text-gray-800">{stats.median}</p>
           </div>
-          <div className="bg-gray-100 p-3 rounded">
-            <p className="text-sm text-gray-500">Skipped</p>
-            <p className="text-xl font-bold">{skipped}</p>
+          <div className="bg-blue-50 p-4 rounded-lg border border-blue-100">
+            <p className="text-sm text-blue-600 font-medium mb-1">Skipped</p>
+            <p className="text-2xl font-bold text-gray-800">{skipped}</p>
           </div>
         </div>
-        <div className="grid grid-cols-2 gap-4">
-          <div className="bg-gray-100 p-3 rounded">
-            <p className="text-sm text-gray-500">Lowest Vote</p>
-            <p className="text-xl font-bold">{stats.min || 'N/A'}</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="bg-blue-50 p-4 rounded-lg border border-blue-100">
+            <p className="text-sm text-blue-600 font-medium mb-1">Lowest Vote</p>
+            <p className="text-2xl font-bold text-gray-800">{stats.min || 'N/A'}</p>
           </div>
-          <div className="bg-gray-100 p-3 rounded">
-            <p className="text-sm text-gray-500">Highest Vote</p>
-            <p className="text-xl font-bold">{stats.max || 'N/A'}</p>
+          <div className="bg-blue-50 p-4 rounded-lg border border-blue-100">
+            <p className="text-sm text-blue-600 font-medium mb-1">Highest Vote</p>
+            <p className="text-2xl font-bold text-gray-800">{stats.max || 'N/A'}</p>
           </div>
         </div>
       </div>
       
       <div>
-        <h3 className="font-bold mb-2">Vote Distribution</h3>
-        <div className="space-y-2">
-          {stats.distribution.map((count, index) => (
-            <div key={index} className="flex items-center">
-              <span className="w-8 text-center">{index + 1}</span>
-              <div className="flex-1 h-6 bg-gray-100 rounded-full overflow-hidden">
-                <div 
-                  className="h-full bg-blue-500"
-                  style={{ 
-                    width: `${votes.length ? (count / votes.length) * 100 : 0}%` 
-                  }}
-                />
+        <h3 className="font-bold mb-4 text-lg text-gray-700 border-t border-gray-200 pt-4">Vote Distribution</h3>
+        <div className="space-y-3">
+          {stats.distribution.map((count, index) => {
+            const percentage = votes.length ? (count / votes.length) * 100 : 0;
+            return (
+              <div key={index} className="flex items-center">
+                <span className="w-8 text-center font-medium text-gray-700">{index + 1}</span>
+                <div className="flex-1 h-8 bg-gray-100 rounded-lg overflow-hidden mx-2">
+                  <div 
+                    className={`h-full ${getDistributionColor(index)} transition-all duration-500`}
+                    style={{ width: `${percentage}%` }}
+                  />
+                </div>
+                <span className="w-12 text-center font-medium">
+                  {count} <span className="text-xs text-gray-500">({percentage.toFixed(0)}%)</span>
+                </span>
               </div>
-              <span className="w-8 text-center">{count}</span>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </div>
