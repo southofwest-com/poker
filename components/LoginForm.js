@@ -61,9 +61,10 @@ export default function LoginForm() {
       {/* Navigation Bar */}
       <nav className="mb-8">
         <div className="bg-gray-100 rounded-lg shadow-md overflow-hidden">
-          <ul className="flex">
-            <li className="flex-1">
-              <button
+          <table>
+
+          <tr>
+             <th> <button
                 className={`w-full py-4 px-4 font-medium text-lg transition-all flex items-center justify-center ${isCreating 
                   ? 'bg-blue-600 text-white shadow-inner' 
                   : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
@@ -74,8 +75,7 @@ export default function LoginForm() {
                 </svg>
                 Create Session
               </button>
-            </li>
-            <li className="flex-1">
+       </th><th>
               <button
                 className={`w-full py-4 px-4 font-medium text-lg transition-all flex items-center justify-center ${!isCreating 
                   ? 'bg-blue-600 text-white shadow-inner' 
@@ -87,8 +87,9 @@ export default function LoginForm() {
                 </svg>
                 Join Session
               </button>
-            </li>
-          </ul>
+              </th>
+              </tr>
+              </table>
         </div>
       </nav>
       
