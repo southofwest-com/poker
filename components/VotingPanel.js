@@ -11,47 +11,47 @@ export default function VotingPanel() {
   };
   
   return (
-    <div>
+    <div className="max-w-2xl mx-auto">
       {hasVoted ? (
-        <div className="text-center py-8">
+        <div className="text-center py-12">
           {selectedValue === 'skip' ? (
-            <div>
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 mx-auto text-gray-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
+            <div className="animate-fade-in">
+              <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gray-100 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </div>
               <p className="text-2xl font-bold mb-3 text-gray-700">You skipped this round</p>
             </div>
           ) : (
-            <div>
-              <div className="h-24 w-24 mx-auto rounded-full bg-blue-100 flex items-center justify-center mb-4">
-                <span className="text-4xl font-bold text-blue-600">{selectedValue}</span>
+            <div className="animate-fade-in">
+              <div className="w-24 h-24 mx-auto rounded-full bg-indigo-100 flex items-center justify-center mb-6 transform transition-all duration-500 hover:scale-110">
+                <span className="text-4xl font-bold text-indigo-600">{selectedValue}</span>
               </div>
               <p className="text-2xl font-bold mb-3 text-gray-700">You voted: {selectedValue}</p>
             </div>
           )}
-          <p className="text-gray-500">Waiting for others to complete voting...</p>
-          <div className="mt-6 flex justify-center">
-            <div className="animate-pulse flex space-x-1">
-              <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
-              <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
-              <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
-            </div>
+          <p className="text-gray-500 mb-6">Waiting for others to complete voting...</p>
+          <div className="flex justify-center space-x-2">
+            <div className="w-3 h-3 bg-indigo-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+            <div className="w-3 h-3 bg-indigo-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+            <div className="w-3 h-3 bg-indigo-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
           </div>
         </div>
       ) : (
         <>
-          <p className="mb-6 text-lg text-center">Select a value from 1-10 or skip this round:</p>
-          <div className="grid grid-cols-5 gap-3 mb-6">
+          <p className="mb-8 text-lg text-center text-gray-600">Select a value from 1-10 or skip this round:</p>
+          <div className="grid grid-cols-5 gap-4 mb-8">
             {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((value) => (
               <button
                 key={value}
                 onClick={() => handleVote(value)}
                 onMouseEnter={() => setHoveredValue(value)}
                 onMouseLeave={() => setHoveredValue(null)}
-                className={`py-5 rounded-lg text-xl font-bold transition-all transform ${
+                className={`py-6 rounded-xl text-xl font-bold transition-all duration-200 transform ${
                   hoveredValue === value
-                    ? 'bg-blue-600 text-white scale-105 shadow-md'
-                    : 'bg-blue-100 text-blue-700 hover:bg-blue-200'
+                    ? 'bg-indigo-600 text-white scale-110 shadow-lg'
+                    : 'bg-indigo-50 text-indigo-700 hover:bg-indigo-100 hover:scale-105'
                 }`}
               >
                 {value}
@@ -60,9 +60,12 @@ export default function VotingPanel() {
           </div>
           <button
             onClick={() => handleVote('skip')}
-            className="w-full py-3 bg-gray-200 rounded-lg hover:bg-gray-300 transition-all text-gray-700 font-medium"
+            className="w-full py-4 bg-gray-100 rounded-xl hover:bg-gray-200 transition-all text-gray-700 font-medium flex items-center justify-center space-x-2"
           >
-            Skip this round
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+            <span>Skip this round</span>
           </button>
         </>
       )}
