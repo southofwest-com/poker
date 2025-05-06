@@ -4,13 +4,47 @@
 
 html,
 body {
-  padding: 50;
-  margin: 25;
+  padding: 0;
+  margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  background-color: #f7f9fc;
 }
 
 * {
   box-sizing: border-box;
 }
 
+/* Additional custom styles */
+.container-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+/* Create more breathing room in the layout */
+.content-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Improve button hover effects */
+.btn-primary {
+  @apply bg-blue-600 text-white py-3 px-6 rounded-lg transition-all duration-200;
+}
+
+.btn-primary:hover {
+  @apply bg-blue-700 shadow-lg transform scale-105;
+}
+
+/* Card styling improvements */
+.card {
+  @apply bg-white rounded-xl shadow-md border border-gray-100 p-6 transition-all duration-200;
+}
+
+.card:hover {
+  @apply shadow-lg;
+}

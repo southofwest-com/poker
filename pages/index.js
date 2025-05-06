@@ -21,7 +21,7 @@ export default function Home() {
         <meta name="description" content="Anonymous voting tool for teams" />
       </Head>
       
-      <div className="min-h-screen bg-gray-100 flex items-center justify-center py-12 px-4">
+      <div className="container-center bg-gradient-to-b from-blue-50 to-gray-100">
         <LoginForm />
       </div>
     </>
