@@ -61,6 +61,7 @@ export default function LoginForm() {
       {/* Navigation Tabs */}
       <div className="flex mb-8 border-b border-gray-200">
         <button
+          type="button"
           className={`flex-1 py-3 px-4 text-sm sm:text-base font-medium transition-all ${
             isCreating 
               ? 'text-indigo-600 border-b-2 border-indigo-600' 
@@ -71,6 +72,7 @@ export default function LoginForm() {
           Create a new session
         </button>
         <button
+          type="button"
           className={`flex-1 py-3 px-4 text-sm sm:text-base font-medium transition-all ${
             !isCreating 
               ? 'text-indigo-600 border-b-2 border-indigo-600' 
